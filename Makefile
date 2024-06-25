@@ -7,5 +7,5 @@ force-generate-client:
 	FORCE=true ./scripts/libpod-generate.sh
 
 clean:
-	rm -rf ./pkg/libpod
+	rm -rf ./client ./models
 
