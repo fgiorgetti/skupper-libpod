@@ -20,6 +20,20 @@ FORCE="${FORCE:-false}"
 
 # Generating libpod clients
 ./scripts/swagger-generate.sh ./v4 ${LIBPOD_SPEC}
-go mod tidy
 cp go.mod v4/
 go mod edit -module github.com/fgiorgetti/skupper-libpod/v4 v4/go.mod
+
+deps=(
+    github.com/go-openapi/errors@v0.20.3
+    github.com/go-openapi/runtime@v0.24.1
+    github.com/go-openapi/strfmt@v0.21.3
+    github.com/go-openapi/swag@v0.21.1
+    github.com/go-openapi/validate@v0.22.0
+)
+cd v4
+for dep in ${deps[@]}; do
+     go get "${dep}"
+done
+cd ..
+
+go mod tidy
