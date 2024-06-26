@@ -49,6 +49,10 @@ func (m *NetworkConnectOptions) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateStaticMac(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
@@ -76,11 +80,32 @@ func (m *NetworkConnectOptions) validateStaticIPs(formats strfmt.Registry) error
 	return nil
 }
 
+func (m *NetworkConnectOptions) validateStaticMac(formats strfmt.Registry) error {
+	if swag.IsZero(m.StaticMac) { // not required
+		return nil
+	}
+
+	if err := m.StaticMac.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("static_mac")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("static_mac")
+		}
+		return err
+	}
+
+	return nil
+}
+
 // ContextValidate validate this network connect options based on the context it is used
 func (m *NetworkConnectOptions) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateStaticIPs(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateStaticMac(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -103,6 +128,20 @@ func (m *NetworkConnectOptions) contextValidateStaticIPs(ctx context.Context, fo
 			return err
 		}
 
+	}
+
+	return nil
+}
+
+func (m *NetworkConnectOptions) contextValidateStaticMac(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := m.StaticMac.ContextValidate(ctx, formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("static_mac")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("static_mac")
+		}
+		return err
 	}
 
 	return nil
