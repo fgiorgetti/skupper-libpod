@@ -16,7 +16,10 @@ LIBPOD_SPEC='./scripts/swagger-v4.0.3.yaml'
 
 FORCE="${FORCE:-false}"
 
-[ -d ./client ] && ! ${FORCE} && exit 0
+[ -d ./v4 ] && ! ${FORCE} && exit 0
 
 # Generating libpod clients
-./scripts/swagger-generate.sh ./ ${LIBPOD_SPEC}
+./scripts/swagger-generate.sh ./v4 ${LIBPOD_SPEC}
+go mod tidy
+cp go.mod v4/
+go mod edit -module github.com/fgiorgetti/skupper-libpod/v4 v4/go.mod
