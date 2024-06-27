@@ -17,7 +17,7 @@ import (
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 
-	"github.com/fgiorgetti/skupper-libpod/v4/models"
+	"github.com/skupperproject/skupper-libpod/v4/models"
 )
 
 // PodInspectLibpodReader is a Reader for the PodInspectLibpod structure.

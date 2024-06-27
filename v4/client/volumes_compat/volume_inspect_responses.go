@@ -16,7 +16,7 @@ import (
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 
-	"github.com/fgiorgetti/skupper-libpod/v4/models"
+	"github.com/skupperproject/skupper-libpod/v4/models"
 )
 
 // VolumeInspectReader is a Reader for the VolumeInspect structure.

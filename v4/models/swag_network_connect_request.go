@@ -48,10 +48,6 @@ func (m *SwagNetworkConnectRequest) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateStaticMac(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
@@ -79,32 +75,11 @@ func (m *SwagNetworkConnectRequest) validateStaticIPs(formats strfmt.Registry) e
 	return nil
 }
 
-func (m *SwagNetworkConnectRequest) validateStaticMac(formats strfmt.Registry) error {
-	if swag.IsZero(m.StaticMac) { // not required
-		return nil
-	}
-
-	if err := m.StaticMac.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("static_mac")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
-			return ce.ValidateName("static_mac")
-		}
-		return err
-	}
-
-	return nil
-}
-
 // ContextValidate validate this swag network connect request based on the context it is used
 func (m *SwagNetworkConnectRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateStaticIPs(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateStaticMac(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -127,20 +102,6 @@ func (m *SwagNetworkConnectRequest) contextValidateStaticIPs(ctx context.Context
 			return err
 		}
 
-	}
-
-	return nil
-}
-
-func (m *SwagNetworkConnectRequest) contextValidateStaticMac(ctx context.Context, formats strfmt.Registry) error {
-
-	if err := m.StaticMac.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("static_mac")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
-			return ce.ValidateName("static_mac")
-		}
-		return err
 	}
 
 	return nil

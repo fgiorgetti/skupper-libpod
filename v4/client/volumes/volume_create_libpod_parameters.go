@@ -15,7 +15,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/fgiorgetti/skupper-libpod/v4/models"
+	"github.com/skupperproject/skupper-libpod/v4/models"
 )
 
 // NewVolumeCreateLibpodParams creates a new VolumeCreateLibpodParams object,

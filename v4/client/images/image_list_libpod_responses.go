@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/fgiorgetti/skupper-libpod/v4/models"
+	"github.com/skupperproject/skupper-libpod/v4/models"
 )
 
 // ImageListLibpodReader is a Reader for the ImageListLibpod structure.
