@@ -1,6 +1,6 @@
 module github.com/fgiorgetti/skupper-libpod/v4
 
-go 1.21.9
+go 1.21.0
 
 require (
 	github.com/go-openapi/errors v0.20.3
