@@ -1,11 +1,12 @@
-all: generate-client
+GOTOOLCHAIN := go1.21.0
 
-generate-client:
-	./scripts/libpod-generate-v4.sh
+all: generate
 
-force-generate-client:
-	FORCE=true ./scripts/libpod-generate-v4.sh
+install-swagger:
+	@go install github.com/go-swagger/go-swagger/cmd/swagger@v0.30.2
+
+generate: install-swagger
+	@GOTOOLCHAIN=$(GOTOOLCHAIN) ./scripts/libpod-generate-v4.sh
 
 clean:
-	rm -rf ./v4
-
+	@rm -rf ./v4
