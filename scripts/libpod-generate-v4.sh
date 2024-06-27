@@ -13,7 +13,7 @@
 # .definitions.InspectContainerConfig.properties.StopSignal (removed)
 # 
 prepare() {
-    [[ -d v4 ]] && return 1
+    [[ -d v4 ]] && echo "v4 client already exists" && return 1
     mkdir v4
     cd v4
     go mod init github.com/fgiorgetti/skupper-libpod/v4 || true
