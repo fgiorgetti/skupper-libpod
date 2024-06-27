@@ -1,3 +1,3 @@
-module github.com/fgiorgetti/skupper-libpod
+module github.com/skupperproject/skupper-libpod
 
 go 1.21

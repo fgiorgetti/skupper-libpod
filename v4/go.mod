@@ -1,4 +1,4 @@
-module github.com/fgiorgetti/skupper-libpod/v4
+module github.com/skupperproject/skupper-libpod/v4
 
 go 1.21.0
 

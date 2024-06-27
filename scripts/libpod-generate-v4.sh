@@ -16,7 +16,7 @@ prepare() {
     [[ -d v4 ]] && echo "v4 client already exists" && return 1
     mkdir v4
     cd v4
-    go mod init github.com/fgiorgetti/skupper-libpod/v4 || true
+    go mod init github.com/skupperproject/skupper-libpod/v4 || true
     go get github.com/go-openapi/errors@v0.20.3 \
            github.com/go-openapi/runtime@v0.24.1 \
            github.com/go-openapi/strfmt@v0.21.3 \
